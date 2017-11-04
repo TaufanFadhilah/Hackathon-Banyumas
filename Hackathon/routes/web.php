@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//User
 Route::get('/profile','UserController@edit')->name('user.edit');
 Route::post('/profile','UserController@update')->name('user.update');
+
+//Ads
+Route::resource('/advertisement','AdvertisementController');
+Route::get('myAdvertisement','AdvertisementController@myAds')->name('advertisement.mine');
 Route::get('/home', 'HomeController@index')->name('home');

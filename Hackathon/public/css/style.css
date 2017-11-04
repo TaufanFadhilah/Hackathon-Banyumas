@@ -14,3 +14,6 @@ margin-bottom: 5px;
 .full-width{
   width: 100%;
 }
+.ads-img{
+  max-height: 300px;
+}

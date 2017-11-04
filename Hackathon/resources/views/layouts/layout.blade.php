@@ -13,7 +13,14 @@
     </head>
 
     <body>
-      @include('layouts.navbar')
+      @auth
+        @include('layouts.navbar-auth')
+      @endauth
+
+      @guest
+        @include('layouts.navbar')
+      @endguest
+
       @yield('content')
       <!-- START FOOTER -->
       <footer class="page-footer grey darken-3">
