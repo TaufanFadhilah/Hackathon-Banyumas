@@ -4,6 +4,8 @@
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a class="dropdown-button" href="#!" data-activates="ads">Ads <i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a class="dropdown-button" href="#!" data-activates="bids">Bids <i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a class="dropdown-button" href="#!" data-activates="transaction">Transaction <i class="material-icons right">arrow_drop_down</i></a></li>
         <li>
           <a href="{{ route('logout') }}"
               onclick="event.preventDefault();
@@ -39,3 +41,16 @@
   <li><a href="{{route('advertisement.index')}}">Looking for Ads</a></li>
 </ul>
 {{-- END DROPDOWN ADS --}}
+{{-- START DROPDOWN BID --}}
+<ul id="bids" class="dropdown-content">
+  <li><a href="{{route('bid.mine')}}">Bids</a></li>
+  <li><a href="{{route('bid.choosen')}}">Choosen Bids</a></li>
+  <li><a href="{{route('bid.ongoing')}}">On going task</a></li>
+  <li><a href="{{route('bid.done')}}">Done task</a></li>
+</ul>
+{{-- END DROPDOWN BID --}}
+{{-- START DROPDOWN TRANSACTION --}}
+<ul id="transaction" class="dropdown-content">
+  <li><a href="{{route('bid.confirmation')}}">Accepted Task</a></li>
+</ul>
+{{-- END DROPDOWN TRANSACTION --}}

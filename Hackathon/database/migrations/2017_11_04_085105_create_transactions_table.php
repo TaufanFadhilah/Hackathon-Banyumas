@@ -17,7 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->integer('bidId')->unsigned();
             $table->integer('advertisementId')->unsigned();
-            $table->integer('status')->default(0)->comment('0 = publisher acc the bid, 1 = influencer start the task, 2 = influencer done task, 3 = admin acc influencer');
+            $table->integer('status')->default(0)->comment('0 = publisher choose bidder, 1 = user get the task, 2 = publisher send money, 3 = users task done, 4 = admin send money to user');
             $table->string('photo')->nullable();
             $table->timestamps();
             $table->softDeletes();
