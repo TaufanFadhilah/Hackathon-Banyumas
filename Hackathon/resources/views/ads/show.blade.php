@@ -1,6 +1,18 @@
 @extends('layouts.layout')
 @section('content')
 <div class="container">
+  @if (session('status'))
+    <div class="row">
+      <div class="col s12 l12">
+        <div class="card green accent-4">
+          <div class="card-content white-text">
+            <span class="card-title">Message</span>
+            <p>{{session('status')}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  @endif
   <div class="row">
     <div class="col l12">
       <table>
@@ -43,17 +55,39 @@
       </table>
     </div>
     @foreach ($data->Photos as $row)
-      <div class="col l4 s12">
+      <div class="row">
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-image">
+              <img src="{{url('storage/'.$row->path)}}">
+              <a href="{{route('adsPhoto.destroy',['id' => $row->id])}}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">delete</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- <div class="col l4 s12">
         <img src="{{url('storage/'.$row->path)}}" class="materialboxed">
         @if ($data->userId == Auth::id())
           <a href="{{route('adsPhoto.destroy',['id' => $row->id])}}"><button class="btn red"><i class="material-icons">delete</i></button></a>
         @endif
-      </div>
+      </div> --}}
     @endforeach
   </div>
   <div class="row">
     <h5>List of bidders</h5>
-    <table class="table bordered">
+    <ul class="collection">
+      @foreach ($data->Bids as $row)
+        <li class="collection-item avatar">
+          <img src="{{url('storage/'.$row->User->photo)}}" alt="" class="circle">
+          <span class="title">{{$row->User->firstName}}</span>
+          <p>Rp. {{number_format($row->price)}} <br>
+             {{$row->note}}
+          </p>
+          {{-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> --}}
+        </li>
+      @endforeach
+    </ul>
+    {{-- <table class="table bordered">
       <tr>
         <th>No.</th>
         <th>Account</th>
@@ -78,7 +112,7 @@
           @endif
         </tr>
       @endforeach
-    </table>
+    </table> --}}
   </div>
   {{-- START USER ACCESS --}}
   @if ($data->userId == Auth::id())

@@ -7,6 +7,7 @@ use App\User;
 use App\Transaction;
 use Auth;
 use Storage;
+use Session;
 use Illuminate\Http\Request;
 
 class BidController extends Controller
@@ -72,6 +73,7 @@ class BidController extends Controller
       $trans->status = 2;
       $trans->photo = $path;
       $trans->save();
+      $request->session()->flash('status', 'Update bid status was successful!');
       return redirect(route('bid.confirmation'));
     }
 
@@ -94,6 +96,7 @@ class BidController extends Controller
     public function store(Request $request)
     {
         Bid::create($request->all());
+        $request->session()->flash('status', 'Create bid was successful!');
         return redirect(route('advertisement.show',['advertisement' => $request->advertisementId]));
     }
 

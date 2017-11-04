@@ -123,6 +123,7 @@ class UserController extends Controller
         $instagram->link = $request->instagram;
         $instagram->save();
       }
+      $request->session()->flash('status', 'Update was successful!');
       return redirect(route('home'));
     }
 

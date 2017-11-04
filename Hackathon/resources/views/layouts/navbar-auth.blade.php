@@ -17,6 +17,7 @@
               {{ csrf_field() }}
           </form>
         </li>
+        <li><a href="{{route('user.edit')}}"><i class="material-icons">person</i></a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href="sass.html">Ads</a></li>

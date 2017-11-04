@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Transaction;
 use Illuminate\Http\Request;
-
+use Session;
 class TransactionController extends Controller
 {
     /**
@@ -39,6 +39,7 @@ class TransactionController extends Controller
         'bidId' => $bidId,
         'advertisementId' => $advertisementId,
       ]);
+      $request->session()->flash('status', 'Create transaction was successful!');
       return redirect(route('advertisement.show',['advertisement' => $advertisementId]));
     }
 

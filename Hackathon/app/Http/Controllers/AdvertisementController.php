@@ -7,6 +7,7 @@ use App\AdvertisementPhoto;
 use Illuminate\Http\Request;
 use Auth;
 use Storage;
+use Session;
 class AdvertisementController extends Controller
 {
     /**
@@ -59,6 +60,7 @@ class AdvertisementController extends Controller
             'path' => $path
           ]);
         }
+        $request->session()->flash('status', 'Create advertisement was successful!');
         return redirect(route('home'));
     }
 
@@ -100,13 +102,16 @@ class AdvertisementController extends Controller
         $advertisement->price = $request->price;
         $advertisement->dueDate = $request->dueDate;
         $advertisement->save();
-        foreach ($request->photos as $photo) {
-          $path = $photo->store('ads', 'public');
-          AdvertisementPhoto::create([
-            'advertisementId' => $advertisement->id,
-            'path' => $path
-          ]);
+        if ($request->photos) {
+          foreach ($request->photos as $photo) {
+            $path = $photo->store('ads', 'public');
+            AdvertisementPhoto::create([
+              'advertisementId' => $advertisement->id,
+              'path' => $path
+            ]);
+          }
         }
+        $request->session()->flash('status', 'Update advertisement was successful!');
         return redirect()->route('advertisement.show',['advertisement' => $advertisement->id]);
     }
 
@@ -123,12 +128,7 @@ class AdvertisementController extends Controller
           $photo->delete();
         }
         $advertisement->delete();
+        session()->flash('status', 'Delete advertisement was successful!');
         return redirect(route('advertisement.mine'));
     }
-
-    /**
-    * Admin function
-    **/
-
-    
 }

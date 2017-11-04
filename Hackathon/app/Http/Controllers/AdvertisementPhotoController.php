@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AdvertisementPhoto;
 use Illuminate\Http\Request;
 use Storage;
+use Session;
 class AdvertisementPhotoController extends Controller
 {
     /**
@@ -82,6 +83,7 @@ class AdvertisementPhotoController extends Controller
     {
       Storage::disk('public')->delete($id->path);
       $id->delete();
+      session()->flash('status', 'Delete advertisement photo was successful!');
       return redirect()->route('advertisement.show',['advertisement' => $id->advertisementId]);
     }
 }
