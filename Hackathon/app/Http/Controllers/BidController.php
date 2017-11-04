@@ -135,6 +135,8 @@ class BidController extends Controller
         return redirect(route('bid.choosen'));
       }elseif($status == 3){
         return redirect(route('bid.ongoing'));
+      }elseif($status == 4){
+        return redirect(route('admin.bidPay'));
       }
 
     }

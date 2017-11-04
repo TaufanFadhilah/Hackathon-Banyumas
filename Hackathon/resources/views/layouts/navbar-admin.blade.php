@@ -1,6 +1,6 @@
 <nav class="green">
     <div class="nav-wrapper">
-      <a href="{{route('home')}}" class="brand-logo center"><img src="{{asset('img/logo-app.png')}}" class="responsive-img nav-logo" style="padding-bottom: 10px"></a>
+      <a href="{{route('home.admin')}}" class="brand-logo center"><img src="{{asset('img/logo-app.png')}}" class="responsive-img nav-logo" style="padding-bottom: 10px"></a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li>

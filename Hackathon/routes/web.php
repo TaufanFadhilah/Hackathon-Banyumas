@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 //PUBLIC
 Auth::routes();
 //Ads
@@ -47,5 +47,13 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::group(['middleware' => ['admin']], function () {
   Route::get('admin','HomeController@admin')->name('home.admin');
+  //User
   Route::get('list/users','UserController@index')->name('user.index');
+  //Advertisement
+  Route::get('list/advertisement','AdminController@advertisement')->name('admin.advertisement');
+  Route::get('list/advertisement/{advertisement}','AdminController@advertisementShow')->name('admin.advertisementShow');
+  //Bid
+  Route::get('list/bid/ongoing','AdminController@bidOngoing')->name('admin.bidOngoing');
+  Route::get('list/bid/pay','AdminController@bidPay')->name('admin.bidPay');
+  Route::get('list/bid/done','AdminController@bidDone')->name('admin.bidDone');
 });

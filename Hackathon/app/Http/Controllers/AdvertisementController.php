@@ -125,4 +125,10 @@ class AdvertisementController extends Controller
         $advertisement->delete();
         return redirect(route('advertisement.mine'));
     }
+
+    /**
+    * Admin function
+    **/
+
+    
 }

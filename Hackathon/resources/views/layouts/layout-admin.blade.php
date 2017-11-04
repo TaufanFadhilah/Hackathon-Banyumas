@@ -37,13 +37,22 @@
         <li><a href="{{route('user.index')}}"><i class="material-icons">people</i>Users</a></li>
         <ul class="collapsible collapsible-accordion">
           <li>
-            <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+            <a class="collapsible-header">Advertisement<i class="material-icons">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="#!">First</a></li>
-                <li><a href="#!">Second</a></li>
-                <li><a href="#!">Third</a></li>
-                <li><a href="#!">Fourth</a></li>
+                <li><a href="{{route('admin.advertisement')}}">List Advertisement</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header">Bid<i class="material-icons">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="{{route('admin.bidOngoing')}}">Bid ongoing</a></li>
+                <li><a href="{{route('admin.bidPay')}}">Bid pay</a></li>
+                <li><a href="{{route('admin.bidDone')}}">Bid done</a></li>
               </ul>
             </div>
           </li>
@@ -55,7 +64,7 @@
             @include('layouts.navbar-admin')
           </header>
           <main>
-            <div class="col l12 white">
+            <div class="col l12 s12 white">
               @yield('content')
             </div>
           </main>
