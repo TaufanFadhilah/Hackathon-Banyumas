@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\user;
+use App\User;
 use App\Instagram;
 use Auth;
 use Storage;
@@ -17,7 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.user.index',[
+          'data' => User::where('typeId',1)->get()
+        ]);
     }
 
     /**

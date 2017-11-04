@@ -27,7 +27,7 @@ class HomeController extends Controller
     }
 
     public function admin(){
-      return view('layouts.layout-admin');
+      return view('admin.home');
     }
 
     public function notAdmin(){
