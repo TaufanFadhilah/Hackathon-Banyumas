@@ -1,0 +1,16 @@
+.nav-logo{
+max-width: 50px;
+max-height: 50px;
+margin: 10px;
+margin-bottom: 5px;
+}
+.parallax-container {
+  min-height: 650px;
+}
+.full-height{
+  min-height: 650px;
+  padding: 20px;
+}
+.full-width{
+  width: 100%;
+}
