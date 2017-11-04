@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 <div class="container">
-  <div class="row full-height">
+  <div class="row">
     <div class="col l12">
       <table>
         <tr>
@@ -51,6 +51,35 @@
       </div>
     @endforeach
   </div>
+  <div class="row">
+    <h5>List of bidders</h5>
+    <table class="table bordered">
+      <tr>
+        <th>No.</th>
+        <th>Account</th>
+        <th>Price</th>
+        <th>Note</th>
+        <th>Choose</th>
+      </tr>
+      @foreach ($data->Bids as $index => $row)
+        <tr>
+          <td>{{++$index}}</td>
+          <td><a href="{{$row->User->Instagram->link}}" target="_blank">{{$row->User->firstName}} {{$row->User->lastName}}</a></td>
+          <td>Rp. {{number_format($row->price)}}</td>
+          <td>{{$row->note}}</td>
+          @if (isset($data->Transaction))
+            @if ($data->Transaction->bidId == $row->id)
+              <td>Choosen</td>
+            @else
+              <td></td>
+            @endif
+          @elseif ($data->userId == Auth::id())
+              <td><a href="{{route('transaction.store',['bidId' => $row->id,'advertisementId' => $data->id])}}"><button class="btn green"><i class="material-icons">check</i></button></a></td>
+          @endif
+        </tr>
+      @endforeach
+    </table>
+  </div>
   {{-- START USER ACCESS --}}
   @if ($data->userId == Auth::id())
     <div class="row">
@@ -70,27 +99,14 @@
       {{-- START GUEST ACCESS --}}
       <div class="row">
         <div class="col l12 s12">
-          <h5>List of bidders</h5>
-          <table class="table">
-            <tr>
-              <th>No.</th>
-              <th>Account</th>
-              <th>Price</th>
-              <th>Note</th>
-            </tr>
-            @foreach ($data->Bids as $index => $row)
-              <tr>
-                <td>{{++$index}}</td>
-                <td><a href="{{$row->User->Instagram->link}}" target="_blank">{{$row->User->firstName}} {{$row->User->lastName}}</a></td>
-                <td>Rp. {{number_format($row->price)}}</td>
-                <td>{{$row->note}}</td>
-              </tr>
-            @endforeach
-          </table>
-          @if ($data->checkBid($data->id,Auth::id()) == 0)
+          @if ($data->checkBid($data->id,Auth::id()) == 0 && !isset($data->Transaction))
             <button data-target="bid" class="btn modal-trigger blue">Click here to bidding!</button>
           @else
-            <p>Youre already set the bid</p>
+            @if (isset($data->Transaction))
+              <p>Bid has been closed</p>
+            @else
+              <p>Youre already set the bid</p>
+            @endif
           @endif
 
         </div>

@@ -35,4 +35,10 @@ class Advertisement extends Model
         return 0;
       }
   }
+
+  public function Transaction()
+  {
+    return $this->hasOne('App\Transaction','advertisementId','id');
+  }
+
 }

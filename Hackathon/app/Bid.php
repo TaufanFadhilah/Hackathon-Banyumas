@@ -11,4 +11,8 @@ class Bid extends Model
     public function User(){
       return $this->belongsTo('App\User','userId','id');
     }
+
+    public function Transaction(){
+      return $this->hasOne('App\Transaction','bidId','id');
+    }
 }

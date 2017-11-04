@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Instagram;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -66,8 +67,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // $path = $data->photo->store('avatar', 'public');
-        return User::create([
+
+        $user = User::create([
             'firstName' => $data['firstName'],
             'lastName' => $data['lastName'],
             'email' => $data['email'],
@@ -75,5 +76,10 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'address' => $data['address'],
         ]);
+        Instagram::create([
+          'userId' => $user->id,
+          'link' => 'https://www.instagram.com'
+        ]);
+        return $user;
     }
 }

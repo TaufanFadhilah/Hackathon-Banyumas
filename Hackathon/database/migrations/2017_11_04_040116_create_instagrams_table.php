@@ -16,7 +16,7 @@ class CreateInstagramsTable extends Migration
         Schema::create('instagrams', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('userId')->unsigned();
-            $table->string('link')->unique();
+            $table->string('link')->nullable();
             $table->softDeletes();
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });

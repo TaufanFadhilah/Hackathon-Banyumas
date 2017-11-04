@@ -31,4 +31,7 @@ Route::get('/adsPhoto/delete/{id}','AdvertisementPhotoController@destroy')->name
 //Bid
 Route::resource('bid','BidController');
 
+//Transaction
+Route::get('transaction/create/{bidId}/{advertisementId}','TransactionController@store')->name('transaction.store');
+
 Route::get('/home', 'HomeController@index')->name('home');
