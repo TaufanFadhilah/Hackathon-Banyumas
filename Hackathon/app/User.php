@@ -35,4 +35,8 @@ class User extends Authenticatable
     ];
     protected $dates = ['deleted_at'];
 
+    public function Instagram()
+    {
+      return $this->hasOne('App\Instagram','userId','id');
+    }
 }

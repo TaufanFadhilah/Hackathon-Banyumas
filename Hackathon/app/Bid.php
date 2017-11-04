@@ -1,0 +1,14 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Bid extends Model
+{
+    protected $fillable = ['userId','advertisementId','note','price'];
+
+    public function User(){
+      return $this->belongsTo('App\User','userId','id');
+    }
+}

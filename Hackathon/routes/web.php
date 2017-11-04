@@ -28,4 +28,7 @@ Route::get('myAdvertisement','AdvertisementController@myAds')->name('advertiseme
 //Ads Photos
 Route::get('/adsPhoto/delete/{id}','AdvertisementPhotoController@destroy')->name('adsPhoto.destroy');
 
+//Bid
+Route::resource('bid','BidController');
+
 Route::get('/home', 'HomeController@index')->name('home');

@@ -45,22 +45,91 @@
     @foreach ($data->Photos as $row)
       <div class="col l4 s12">
         <img src="{{url('storage/'.$row->path)}}" class="materialboxed">
-        <a href="{{route('adsPhoto.destroy',['id' => $row->id])}}"><button class="btn red"><i class="material-icons">delete</i></button></a>
+        @if ($data->userId == Auth::id())
+          <a href="{{route('adsPhoto.destroy',['id' => $row->id])}}"><button class="btn red"><i class="material-icons">delete</i></button></a>
+        @endif
       </div>
     @endforeach
   </div>
-  <div class="row">
-    <div class="col l6">
-      <a class="waves-effect waves-light btn amber modal-trigger full-width" href="#edit"><i class="material-icons left">edit</i>Edit</a>
+  {{-- START USER ACCESS --}}
+  @if ($data->userId == Auth::id())
+    <div class="row">
+      <div class="col l6">
+        <a class="waves-effect waves-light btn amber modal-trigger full-width" href="#edit"><i class="material-icons left">edit</i>Edit</a>
+      </div>
+      <div class="col l6">
+        <form class="" action="{{route('advertisement.destroy',['advertisement' => $data->id])}}" method="post">
+          {{ csrf_field() }}
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit" class="btn red full-width"><i class="material-icons left">delete</i>Delete</button>
+        </form>
+      </div>
     </div>
-    <div class="col l6">
-      <form class="" action="{{route('advertisement.destroy',['advertisement' => $data->id])}}" method="post">
-        {{ csrf_field() }}
-        <input type="hidden" name="_method" value="delete">
-        <button type="submit" class="btn red full-width"><i class="material-icons left">delete</i>Delete</button>
-      </form>
-    </div>
-  </div>
+    {{-- END USER ACCESS --}}
+    @else
+      {{-- START GUEST ACCESS --}}
+      <div class="row">
+        <div class="col l12 s12">
+          <h5>List of bidders</h5>
+          <table class="table">
+            <tr>
+              <th>No.</th>
+              <th>Account</th>
+              <th>Price</th>
+              <th>Note</th>
+            </tr>
+            @foreach ($data->Bids as $index => $row)
+              <tr>
+                <td>{{++$index}}</td>
+                <td><a href="{{$row->User->Instagram->link}}" target="_blank">{{$row->User->firstName}} {{$row->User->lastName}}</a></td>
+                <td>Rp. {{number_format($row->price)}}</td>
+                <td>{{$row->note}}</td>
+              </tr>
+            @endforeach
+          </table>
+          @if ($data->checkBid($data->id,Auth::id()) == 0)
+            <button data-target="bid" class="btn modal-trigger blue">Click here to bidding!</button>
+          @else
+            <p>Youre already set the bid</p>
+          @endif
+
+        </div>
+      </div>
+
+      {{-- START BID MODAL --}}
+      <div id="bid" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Start Bidding</h4>
+          <form action="{{route('bid.store')}}" method="post">
+            {{ csrf_field() }}
+            <input type="hidden" name="userId" value="{{Auth::id()}}">
+            <input type="hidden" name="advertisementId" value="{{$data->id}}">
+            <div class="input-field col l12">
+              <input type="number" name="price" id="price" class="validate" required>
+              <label for="price">Bid Price</label>
+              @if ($errors->has('price'))
+                  <small class="red-text">{{ $errors->first('price') }}</small>
+              @endif
+            </div>
+            <div class="input-field col l12 s12">
+              <textarea name="note" class="materialize-textarea" id="note" required></textarea>
+              <label for="note">Note</label>
+              @if ($errors->has('note'))
+                  <small class="red-text">{{ $errors->first('note') }}</small>
+              @endif
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn blue">Save</button>
+        </div>
+        </form>
+      </div>
+      {{-- ENN BID MODAL --}}
+
+      {{-- END GUEST ACCESS --}}
+  @endif
+
+
 </div>
 {{-- START EDIT MODAL --}}
 <div id="edit" class="modal modal-fixed-footer">
@@ -119,6 +188,7 @@
   </div>
 {{-- END EDIT MODAL --}}
 @endsection
+
 @push('js')
   <script type="text/javascript">
   $(document).ready(function(){

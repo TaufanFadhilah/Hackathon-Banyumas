@@ -63,9 +63,11 @@ class UserController extends Controller
         $instagram = Instagram::where('userId',Auth::user()->id)->first();
         if (!$instagram) {
           $instagram = '';
+        }else{
+          $instagram = $instagram->link;
         }
         return view('user.profile',[
-          'instagram' => $instagram->link
+          'instagram' => $instagram
         ]);
     }
 
