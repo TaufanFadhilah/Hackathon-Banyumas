@@ -23,7 +23,7 @@ class AdvertisementController extends Controller
 
     public function myAds(){
       return view('ads.index',[
-        'data' => Advertisement::where('userId',Auth::id())->get() 
+        'data' => Advertisement::where('userId',Auth::id())->get()
       ]);
     }
 
@@ -95,7 +95,19 @@ class AdvertisementController extends Controller
      */
     public function update(Request $request, Advertisement $advertisement)
     {
-        //
+        $advertisement->title = $request->title;
+        $advertisement->desc = $request->desc;
+        $advertisement->price = $request->price;
+        $advertisement->dueDate = $request->dueDate;
+        $advertisement->save();
+        foreach ($request->photos as $photo) {
+          $path = $photo->store('ads', 'public');
+          AdvertisementPhoto::create([
+            'advertisementId' => $advertisement->id,
+            'path' => $path
+          ]);
+        }
+        return redirect()->route('advertisement.show',['advertisement' => $advertisement->id]);
     }
 
     /**
@@ -106,6 +118,11 @@ class AdvertisementController extends Controller
      */
     public function destroy(Advertisement $advertisement)
     {
-        //
+        foreach ($advertisement->Photos as $photo) {
+          Storage::disk('public')->delete($photo->path);
+          $photo->delete();
+        }
+        $advertisement->delete();
+        return redirect(route('advertisement.mine'));
     }
 }

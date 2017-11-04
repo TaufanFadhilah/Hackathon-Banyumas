@@ -24,4 +24,8 @@ Route::post('/profile','UserController@update')->name('user.update');
 //Ads
 Route::resource('/advertisement','AdvertisementController');
 Route::get('myAdvertisement','AdvertisementController@myAds')->name('advertisement.mine');
+
+//Ads Photos
+Route::get('/adsPhoto/delete/{id}','AdvertisementPhotoController@destroy')->name('adsPhoto.destroy');
+
 Route::get('/home', 'HomeController@index')->name('home');
