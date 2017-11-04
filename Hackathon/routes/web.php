@@ -14,8 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+//PUBLIC
 Auth::routes();
+//Ads
+Route::resource('/advertisement','AdvertisementController');
+Route::get('notAdmin','HomeController@notAdmin')->name('notAdmin');
+
 Route::group(['middleware' => ['auth']], function () {
   //User
   Route::get('/profile','UserController@edit')->name('user.edit');
@@ -40,5 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::get('/home', 'HomeController@index')->name('home');
 });
-//Ads
-Route::resource('/advertisement','AdvertisementController');
+
+Route::group(['middleware' => ['admin']], function () {
+  Route::get('admin','HomeController@admin')->name('home.admin');
+});

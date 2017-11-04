@@ -49,7 +49,7 @@ class UserController extends Controller
      */
     public function show()
     {
-        return view('user.profile');
+      return view('user.profile');
     }
 
     /**
@@ -60,6 +60,9 @@ class UserController extends Controller
      */
     public function edit()
     {
+        if(Auth::user()->typeId == 2){
+          return redirect(route('home.admin'));
+        }
         $instagram = Instagram::where('userId',Auth::user()->id)->first();
         if (!$instagram) {
           $instagram = '';

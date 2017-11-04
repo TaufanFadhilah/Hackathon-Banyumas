@@ -14,14 +14,8 @@
     </head>
 
     <body>
-      @auth
-        @include('layouts.navbar-auth')
-      @endauth
-
-      @guest
-        @include('layouts.navbar')
-      @endguest
-
+      @include('layouts.navbar-auth')
+      <h1>This is admin</h1>
       @yield('content')
       <!-- START FOOTER -->
       <footer class="page-footer grey darken-3">
