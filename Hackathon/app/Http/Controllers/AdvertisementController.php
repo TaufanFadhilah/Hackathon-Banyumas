@@ -17,14 +17,15 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
+        $result = Advertisement::paginate(9);
         return view('ads.index',[
-          'data' => Advertisement::all()
+          'data' => $result
         ]);
     }
 
     public function myAds(){
       return view('ads.index',[
-        'data' => Advertisement::where('userId',Auth::id())->get()
+        'data' => Advertisement::where('userId',Auth::id())->paginate(9)
       ]);
     }
 

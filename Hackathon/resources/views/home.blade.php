@@ -15,7 +15,7 @@
       </div>
     @endif
     <div class="row full-height">
-      <h1>Youre Logged</h1>
+      <img src="{{asset('img/logo-tagline.png')}}" class="responsive-img">
     </div>
 </div>
 @endsection
