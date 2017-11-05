@@ -20,7 +20,17 @@
         <li><a href="{{route('user.edit')}}"><i class="material-icons">person</i></a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
-        <li><a href="sass.html">Ads</a></li>
+        <li><a href="{{route('advertisement.create')}}">Create Ads</a></li>
+        <li><a href="{{route('advertisement.mine')}}">My Ads</a></li>
+        <li><a href="{{route('advertisement.index')}}">Looking for Ads</a></li>
+        <li><div class="divider"></div></li>
+        <li><a href="{{route('bid.mine')}}">Bids</a></li>
+        <li><a href="{{route('bid.choosen')}}">Choosen Bids</a></li>
+        <li><div class="divider"></div></li>
+        <li><a href="{{route('bid.ongoing')}}">On going task</a></li>
+        <li><a href="{{route('bid.done')}}">Done task</a></li>
+        <li><a href="{{route('bid.confirmation')}}">Accepted Task</a></li>
+        <li><div class="divider"></div></li>
         <li>
           <a href="{{ route('logout') }}"
               onclick="event.preventDefault();

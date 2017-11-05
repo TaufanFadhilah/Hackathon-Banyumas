@@ -83,6 +83,15 @@
           <p>Rp. {{number_format($row->price)}} <br>
              {{$row->note}}
           </p>
+          @if (isset($data->Transaction))
+            @if ($data->Transaction->bidId == $row->id)
+              <td>Choosen</td>
+            @else
+              <td></td>
+            @endif
+          @elseif ($data->userId == Auth::id())
+              <td><a href="{{route('transaction.store',['bidId' => $row->id,'advertisementId' => $data->id])}}"  class="secondary-content"><button class="btn green"><i class="material-icons">check</i></button></a></td>
+          @endif
           {{-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> --}}
         </li>
       @endforeach

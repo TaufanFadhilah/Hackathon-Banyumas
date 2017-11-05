@@ -39,7 +39,7 @@ class TransactionController extends Controller
         'bidId' => $bidId,
         'advertisementId' => $advertisementId,
       ]);
-      $request->session()->flash('status', 'Create transaction was successful!');
+      session()->flash('status', 'Create transaction was successful!');
       return redirect(route('advertisement.show',['advertisement' => $advertisementId]));
     }
 

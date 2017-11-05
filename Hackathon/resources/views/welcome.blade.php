@@ -52,7 +52,7 @@
           <div class="col l6 offset-l3 center">
             <img src="{{asset('img/white-logo.png')}}" class="responsive-img">
             <p class="white-text">Show Up! is headquartered in Indonesia where the Co-Founder Taufan, Yusuf, Niken are the pioneer of Show Up!.
-               Show Up! was founded in 23 August 2017 to help people advertise and promote everything they want to.
+               Show Up! was founded to help people advertise and promote everything they want to.
                 Besides that, Show Up! come with a unique concepts and appearances to get their goals.</p>
           </div>
         </div>
