@@ -19,6 +19,10 @@ Auth::routes();
 //Ads
 Route::resource('/advertisement','AdvertisementController');
 Route::get('notAdmin','HomeController@notAdmin')->name('notAdmin');
+// Survey
+Route::get('/survey','SurveyController@create')->name('survey');
+Route::post('/survey','SurveyController@store')->name('survey');
+Route::get('surveyResult','SurveyController@index')->name('survey.result');
 
 Route::group(['middleware' => ['auth']], function () {
   //User

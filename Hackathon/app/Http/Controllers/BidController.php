@@ -140,6 +140,8 @@ class BidController extends Controller
         return redirect(route('bid.ongoing'));
       }elseif($status == 4){
         return redirect(route('admin.bidPay'));
+      }else{
+        return redirect(route('home'));
       }
 
     }

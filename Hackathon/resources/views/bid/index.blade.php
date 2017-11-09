@@ -29,6 +29,7 @@
         @if (isset($bid))
           @foreach ($data as $index => $row)
             <tr>
+              <td>{{$row}}</td>
               <td>{{++$index}}</td>
               <td><a href="{{route('advertisement.show',['advertisement' => $row->Advertisement->id])}}">{{$row->Advertisement->title}}</a></td>
               <td>Rp. {{number_format($row->price)}}</td>

@@ -28,7 +28,7 @@
             <h3 class="white-text" style="margin-top: 25%">
               Search, Find, Take Up <br> Everything You Want!
             </h3>
-            <p><a class="yellow-text">Help us to improve our services. Take the survey ...</a></p>
+            <p><a href="{{route('survey')}}" class="yellow-text">Help us to improve our services. Take the survey ...</a></p>
           </div>
         </div>
       </div>
